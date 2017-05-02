@@ -27,10 +27,11 @@ public class Hangman {
     {
         String serverName = "192.168.2.110";
         int port = 8888;
-        
+        Socket clientSocket = new Socket(serverName, port);
+     try {   
 
         System.out.println("Connecting to " + serverName + " on port " + port);
-        Socket clientSocket = new Socket(serverName, port);
+        
         System.out.println("Just connected to " + clientSocket.getRemoteSocketAddress());
         OutputStream outToServer = clientSocket.getOutputStream();
         PrintWriter bw = new PrintWriter(outToServer, true);
@@ -43,8 +44,9 @@ public class Hangman {
         
         String lettera = console.readLine().trim();
         bw.println(lettera);
-        
+     } catch(Exception e) {
         clientSocket.close();
+     }
 
    }
 }
